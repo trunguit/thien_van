@@ -109,3 +109,7 @@ Route::get('tim-kiem', [HomeController::class, 'search'])->name('frontend.search
 Route::get('trang/{alias?}.html', [HomeController::class, 'page'])->name('frontend.page');
 
 Route::post('yeu-cau-bao-gia.html', [FrontendCategoryController::class, 'quotes'])->name('frontend.quotes.store');
+Route::post('/deploy-hook', function () {
+    include base_path('deploy-hook.php');
+    return response()->json(['message' => 'Deployed!']);
+});
