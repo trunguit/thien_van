@@ -12,7 +12,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->validateCsrfTokens(except: [
-            '/admin/tinymce/upload-image'
+            '/admin/tinymce/upload-image',
+            'deploy-hook'
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
