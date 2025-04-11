@@ -112,3 +112,6 @@ Route::get('trang/{alias?}.html', [HomeController::class, 'page'])->name('fronte
 Route::post('yeu-cau-bao-gia.html', [FrontendCategoryController::class, 'quotes'])->name('frontend.quotes.store');
 Route::post('deploy-hook', [DeployHookController::class, 'handleDeploy'])
      ->withoutMiddleware(['csrf']);
+Route::get('/test-route', function () {
+        return 'Route works!';
+    });
