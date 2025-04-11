@@ -28,8 +28,7 @@ class DeployHookController extends Controller
         $commands = [
             'git reset --hard HEAD',
             'git pull origin main',
-            'composer install --no-dev --optimize-autoloader --no-interaction',
-            'php artisan migrate --force',
+            '/usr/local/bin/composer install --no-dev --optimize-autoloader --no-interaction',
             'php artisan config:cache',
             'php artisan view:cache',
         ];
