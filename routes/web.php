@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\CustomerReivewController;
 use App\Http\Controllers\Admin\KeywordController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\DeployHookController;
 use App\Models\Keyword;
 use App\Models\Page;
 use Illuminate\Support\Facades\Route;
@@ -109,7 +110,5 @@ Route::get('tim-kiem', [HomeController::class, 'search'])->name('frontend.search
 Route::get('trang/{alias?}.html', [HomeController::class, 'page'])->name('frontend.page');
 
 Route::post('yeu-cau-bao-gia.html', [FrontendCategoryController::class, 'quotes'])->name('frontend.quotes.store');
-Route::post('/deploy-hook', function () {
-    include base_path('deploy-hook.php');
-    return response()->json(['message' => 'Deployed!']);
-});
+Route::post('/deploy-hook', [DeployHookController::class, 'handleDeploy'])
+     ->withoutMiddleware(['csrf']);
