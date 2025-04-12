@@ -23,26 +23,115 @@
         </div>
         <div class="container catagory-space">
             <div class="row">
-                <aside id="colm-left" class="col-lg-5 col-sm-12 col-md-12 col-xs-12 hidden-sm hidden-xs">
+                <aside id="colm-left" class="col-lg-3 col-sm-12 col-md-12 col-xs-12 hidden-sm hidden-xs">
                     <div class="page">
                         <aside class="page-sidebar" id="faceted-search-container">
                             <nav>
-                                <div id="facetedSearch" class="facetedSearch sidebarBlock category-list">
+                                <div id="facetedSearch" class="facetedSearch sidebarBlock">
                                     <div class="facetedSearch-refineFilters sidebarBlock">
-                                        <h2 class="sidebarBlock-heading title-category">
-                                            Danh mục
+                                        <h2 class="sidebarBlock-heading">
+                                            Refine by
                                         </h2>
+
+                                        <p>No filters applied</p>
+
                                     </div>
-                                    <ul class="facetedSearch-navList--size">
-                                        @foreach ($categories as $category)
-                                            <li class="category navList-item">
-                                                <span class="icon">•</span>
-                                                <a class="category-label" href="{{ route('category', $category->alias) }}">
-                                                    <span>{{ $category->name }}</span>
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
+
+                                    <a href="#facetedSearch-navList" role="button" class="facetedSearch-toggle toggleLink"
+                                        data-collapsible="" aria-label="Browse by Brand, Color &amp; more"
+                                        aria-controls="facetedSearch-navList" aria-expanded="true">
+                                        <span class="facetedSearch-toggle-text">
+                                            Browse by Brand, Color &amp; more
+                                        </span>
+
+                                        <span class="facetedSearch-toggle-indicator">
+                                            <span class="toggleLink-text toggleLink-text--on">
+                                                Hide Filters
+
+                                                <i class="icon" aria-hidden="true">
+                                                    <svg>
+                                                        <use xlink:href="#icon-keyboard-arrow-up"></use>
+                                                    </svg>
+                                                </i>
+                                            </span>
+
+                                            <span class="toggleLink-text toggleLink-text--off">
+                                                Show Filters
+
+                                                <i class="icon" aria-hidden="true">
+                                                    <svg>
+                                                        <use xlink:href="#icon-keyboard-arrow-down"></use>
+                                                    </svg>
+                                                </i>
+                                            </span>
+                                        </span>
+                                    </a>
+
+                                    <div id="facetedSearch-navList" class="facetedSearch-navList" aria-hidden="false">
+                                        <div class="accordion accordion--navList">
+
+
+
+                                            <div class="accordion-block">
+                                                <div class="accordion-nav-clear-holder">
+                                                    <button type="button" class="accordion-navigation toggleLink is-open"
+                                                        data-collapsible="#facetedSearch-content--price" aria-label="Price"
+                                                        aria-controls="facetedSearch-content--price" aria-expanded="true">
+                                                        <span class="accordion-title">
+                                                            Price
+                                                        </span>
+
+                                                        <span>
+                                                            <svg
+                                                                class="icon accordion-indicator toggleLink-text toggleLink-text--off">
+                                                                <use xlink:href="#icon-add"></use>
+                                                            </svg>
+                                                            <svg
+                                                                class="icon accordion-indicator toggleLink-text toggleLink-text--on">
+                                                                <use xlink:href="#icon-remove"></use>
+                                                            </svg>
+                                                        </span>
+                                                    </button>
+                                                </div>
+
+                                                <div id="facetedSearch-content--price" class="accordion-content is-open"
+                                                    aria-hidden="false">
+                                                    <form id="facet-range-form" class="form" method="get"
+                                                        data-faceted-search-range="" novalidate="">
+                                                        <input type="hidden" name="search_query" value="">
+                                                        <fieldset class="form-fieldset _">
+                                                            <div class="form-minMaxRow">
+                                                                <div class="form-field">
+                                                                    <input name="min_price" placeholder="Min."
+                                                                        min="0" class="form-input form-input--small"
+                                                                        required="" type="number" value="">
+                                                                </div>
+
+                                                                <div class="form-field">
+                                                                    <input name="max_price" placeholder="Max."
+                                                                        min="0" class="form-input form-input--small"
+                                                                        required="" type="number" value="">
+                                                                </div>
+
+                                                                <div class="form-field">
+                                                                    <button class="button button--small" type="submit">
+                                                                        Update
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="nod-success-message" style="display: none;">Max.
+                                                                price is required.</div>
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="blocker" style="display: none;"></div>
+                                    </div>
                                 </div>
                             </nav>
                         </aside>

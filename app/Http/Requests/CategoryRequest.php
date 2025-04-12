@@ -28,6 +28,7 @@ class CategoryRequest extends FormRequest
             'status' => 'required|in:active,inactive',
             'meta_title' => 'nullable|string',
             'meta_description' => 'nullable|string',
+            'description' => 'nullable|string',
         ];
     }
     public function messages(){

@@ -22,18 +22,25 @@
                         <textarea name="introduction" class="form-control" id="" cols="30" rows="10">{{$settings->introduction}}</textarea>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Số điện thoại</label>
-                        <input type="text" name="phone" class="form-control" value="{{ $settings->phone }}">
+                        <label class="form-label">Số điện thoại 1</label>
+                        <input type="text" name="phone" class="form-control" value="{{ $settings->phone1 }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Số điện thoại 2</label>
+                        <input type="text" name="phone" class="form-control" value="{{ $settings->phone2 }}">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Địa chỉ</label>
                         <input type="text" name="address" class="form-control" value="{{ $settings->address }}">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" value="{{ $settings->email }}">
+                        <label class="form-label">Email 1</label>
+                        <input type="email" name="email1" class="form-control" value="{{ $settings->email1 }}">
                     </div>
-        
+                    <div class="mb-3">
+                        <label class="form-label">Email 2</label>
+                        <input type="email" name="email1" class="form-control" value="{{ $settings->email2 }}">
+                    </div>
                   
 
                    

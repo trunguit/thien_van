@@ -29,32 +29,166 @@
         </div>
         <div class="container catagory-space">
             <div class="row">
-                <aside id="colm-left" class="col-lg-5 col-sm-12 col-md-12 col-xs-12 hidden-sm hidden-xs">
+
+                <aside id="colm-left" class="col-lg-3 col-sm-12 col-md-12 col-xs-12 hidden-sm hidden-xs">
                     <div class="page">
                         <aside class="page-sidebar" id="faceted-search-container">
                             <nav>
-                                <div id="facetedSearch" class="facetedSearch sidebarBlock category-list">
-                                    <div class="facetedSearch-refineFilters sidebarBlock">
-                                        <h2 class="sidebarBlock-heading title-category">
-                                            Danh mục
-                                        </h2>
+                                @if ($category->children->count() > 0)
+                                    <div class="sidebarBlock">
+                                        <h2 class="sidebarBlock-heading">{{ $category->name }}</h2>
+                                        <ul class="category-list">
+                                            @foreach ($category->children as $child)
+                                                <li class="navList-item">
+                                                    <a class="navList-action" href="{{ route('category', $child->alias) }}"
+                                                        title="berries">{{ $child->name }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
                                     </div>
-                                    <ul class="facetedSearch-navList--size">
-                                        @foreach ($categories as $category)
-                                            <li class="category navList-item">
-                                                <span class="icon">•</span>
-                                                <a class="category-label" href="{{ route('category', $category->alias) }}">
-                                                    <span>{{ $category->name }}</span>
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
+                                @endif
+                                <div id="facetedSearch" class="facetedSearch sidebarBlock">
+                                    <div class="facetedSearch-refineFilters sidebarBlock">
+                                        <h2 class="sidebarBlock-heading">
+                                            Refine by
+                                        </h2>
+
+                                        <p>No filters applied</p>
+
+                                    </div>
+
+                                    <a href="#facetedSearch-navList" role="button" class="facetedSearch-toggle toggleLink"
+                                        data-collapsible="" aria-label="Browse by Brand, Color &amp; more"
+                                        aria-controls="facetedSearch-navList" aria-expanded="true">
+                                        <span class="facetedSearch-toggle-text">
+                                            Browse by Brand, Color &amp; more
+                                        </span>
+
+                                        <span class="facetedSearch-toggle-indicator">
+                                            <span class="toggleLink-text toggleLink-text--on">
+                                                Hide Filters
+
+                                                <i class="icon" aria-hidden="true">
+                                                    <svg>
+                                                        <use xlink:href="#icon-keyboard-arrow-up"></use>
+                                                    </svg>
+                                                </i>
+                                            </span>
+
+                                            <span class="toggleLink-text toggleLink-text--off">
+                                                Show Filters
+
+                                                <i class="icon" aria-hidden="true">
+                                                    <svg>
+                                                        <use xlink:href="#icon-keyboard-arrow-down"></use>
+                                                    </svg>
+                                                </i>
+                                            </span>
+                                        </span>
+                                    </a>
+
+                                    <div id="facetedSearch-navList" class="facetedSearch-navList" aria-hidden="false">
+                                        <div class="accordion accordion--navList">
+
+
+
+                                            <div class="accordion-block">
+                                                <div class="accordion-nav-clear-holder">
+                                                    <button type="button" class="accordion-navigation toggleLink is-open"
+                                                        data-collapsible="#facetedSearch-content--price" aria-label="Price"
+                                                        aria-controls="facetedSearch-content--price" aria-expanded="true">
+                                                        <span class="accordion-title">
+                                                            Price
+                                                        </span>
+
+                                                        <span>
+                                                            <svg
+                                                                class="icon accordion-indicator toggleLink-text toggleLink-text--off">
+                                                                <use xlink:href="#icon-add"></use>
+                                                            </svg>
+                                                            <svg
+                                                                class="icon accordion-indicator toggleLink-text toggleLink-text--on">
+                                                                <use xlink:href="#icon-remove"></use>
+                                                            </svg>
+                                                        </span>
+                                                    </button>
+                                                </div>
+
+                                                <div id="facetedSearch-content--price" class="accordion-content is-open"
+                                                    aria-hidden="false">
+                                                    <form id="facet-range-form" class="form" method="get"
+                                                        data-faceted-search-range="" novalidate="">
+                                                        <input type="hidden" name="search_query" value="">
+                                                        <fieldset class="form-fieldset _">
+                                                            <div class="form-minMaxRow">
+                                                                <div class="form-field">
+                                                                    <input name="min_price" placeholder="Min."
+                                                                        min="0" class="form-input form-input--small"
+                                                                        required="" type="number" value="">
+                                                                </div>
+
+                                                                <div class="form-field">
+                                                                    <input name="max_price" placeholder="Max."
+                                                                        min="0" class="form-input form-input--small"
+                                                                        required="" type="number" value="">
+                                                                </div>
+
+                                                                <div class="form-field">
+                                                                    <button class="button button--small" type="submit">
+                                                                        Update
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="nod-success-message" style="display: none;">Max.
+                                                                price is required.</div>
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="blocker" style="display: none;"></div>
+                                    </div>
                                 </div>
                             </nav>
                         </aside>
                     </div>
                 </aside>
-                <div class="col-lg-7 col-sm-12 col-md-12  col-xs-12 colright" id="content">
+                <div class="col-lg-9 col-sm-12 col-md-12  col-xs-12 colright" id="content">
+                    <div class="category-top row hidden-xs">
+                        <div class="col-12 col-md-12">
+                            <h2 class="section-heading">{{ $category->name }}</h2>
+                        </div>
+                        <div class="col-xl-2 col-sm-3 col-12 hidden-sm">
+                            <img src="{{ $category->image != '' ? asset($category->image) : asset('frontend/cate.png') }} "
+                                alt="Shop All" title="Shop All" data-sizes="auto"
+                                srcset="https://cdn11.bigcommerce.com/s-a4jwov0yt3/images/stencil/80w/e/2__50732.original.png 80w, https://cdn11.bigcommerce.com/s-a4jwov0yt3/images/stencil/160w/e/2__50732.original.png 160w, https://cdn11.bigcommerce.com/s-a4jwov0yt3/images/stencil/320w/e/2__50732.original.png 320w, https://cdn11.bigcommerce.com/s-a4jwov0yt3/images/stencil/640w/e/2__50732.original.png 640w, https://cdn11.bigcommerce.com/s-a4jwov0yt3/images/stencil/960w/e/2__50732.original.png 960w, https://cdn11.bigcommerce.com/s-a4jwov0yt3/images/stencil/1280w/e/2__50732.original.png 1280w, https://cdn11.bigcommerce.com/s-a4jwov0yt3/images/stencil/1920w/e/2__50732.original.png 1920w, https://cdn11.bigcommerce.com/s-a4jwov0yt3/images/stencil/2560w/e/2__50732.original.png 2560w"
+                                data-srcset="https://cdn11.bigcommerce.com/s-a4jwov0yt3/images/stencil/80w/e/2__50732.original.png 80w, https://cdn11.bigcommerce.com/s-a4jwov0yt3/images/stencil/160w/e/2__50732.original.png 160w, https://cdn11.bigcommerce.com/s-a4jwov0yt3/images/stencil/320w/e/2__50732.original.png 320w, https://cdn11.bigcommerce.com/s-a4jwov0yt3/images/stencil/640w/e/2__50732.original.png 640w, https://cdn11.bigcommerce.com/s-a4jwov0yt3/images/stencil/960w/e/2__50732.original.png 960w, https://cdn11.bigcommerce.com/s-a4jwov0yt3/images/stencil/1280w/e/2__50732.original.png 1280w, https://cdn11.bigcommerce.com/s-a4jwov0yt3/images/stencil/1920w/e/2__50732.original.png 1920w, https://cdn11.bigcommerce.com/s-a4jwov0yt3/images/stencil/2560w/e/2__50732.original.png 2560w"
+                                class="category-header-image lazyautosizes ls-is-cached lazyloaded" sizes="144px">
+                        </div>
+                        <div class="col-xl-10 col-sm-9 col-12 catedes">
+                            <p><span>{{ $category->description }}</span></p>
+                            @if ($category->children->count() > 0)
+                                <div class="sub-cate-img row">
+                                    @foreach ($category->children as $item)
+                                        <div class="sun-cat-sin col-6 col-sm-4 col-md-4 col-lg-2">
+                                            <a href="{{ route('category', $item->alias) }}" alt="{{ $item->name }}"
+                                                title="{{ $item->name }}"><img
+                                                    src="{{ $item->image != '' ? asset($item->image) : asset('frontend/cate.png') }}"></a>
+                                            <h4><a href="{{ route('category', $item->alias) }}"
+                                                    alt="{{ $item->name }}"
+                                                    title="{{ $item->name }}">{{ $item->name }}</a>
+                                            </h4>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                        </div>
+                    </div>
                     <div class="row cate-border">
                         <div class="col-md-6 col-3 category-grid">
                             <span id="gridProduct" class="active" title="Grid"><svg width="20px" height="20px">
@@ -125,9 +259,49 @@
                                                     </h4>
                                                     <div class="card-text myprice" data-test-info-type="price">
                                                         <span data-product-price-without-tax=""
-                                                            class="price price--withoutTax">Giá : Liên hệ</span>
+                                                            class="price price--withoutTax">{{ number_format($product->sale_price) }}đ</span>
+                                                    </div>
+                                                    <div
+                                                        class="price-section d-inline-block price-section--withoutTax non-sale-price--withoutTax">
+
+                                                        <span data-product-non-sale-price-without-tax=""
+                                                            class="price price--non-sale">
+                                                            {{ number_format($product->price) }}đ
+                                                        </span>
+                                                    </div>
+                                                    <div class="card-text card-rating"
+                                                        data-test-info-type="productRating">
+                                                        <span class="rating--small">
+                                                            <div class="comments_note wb-list-product-reviews">
+                                                                <span class="avg-rate bg-re3">
+                                                                    <span class="rate-tot winter-count">0</span><i
+                                                                        class="fa fa-star emstar"></i>
+                                                                    <span class="or-rate winter-review">
+                                                                        <span class="icon icon--ratingEmpty"><i
+                                                                                class="fa fa-star-o"></i></span><span
+                                                                            class="icon icon--ratingEmpty"><i
+                                                                                class="fa fa-star-o"></i></span><span
+                                                                            class="icon icon--ratingEmpty"><i
+                                                                                class="fa fa-star-o"></i></span><span
+                                                                            class="icon icon--ratingEmpty"><i
+                                                                                class="fa fa-star-o"></i></span><span
+                                                                            class="icon icon--ratingEmpty"><i
+                                                                                class="fa fa-star-o"></i></span><!-- snippet location product_rating -->
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                        </span>
+                                                    </div>
+                                                    <div class="singleprobtn">
+                                                        <a href="{{ route('product', $product->alias) }}"
+                                                            data-event-type="product-click" title="Add to Cart"
+                                                            class="button button--small card-figcaption-button myadcart"
+                                                            data-product-id="86"><svg width="20px" height="20px">
+                                                                <use xlink:href="#hcart"></use>
+                                                            </svg><span class="cart-text">Thêm vào giỏ hàng</span></a>
                                                     </div>
                                                 </div>
+
                                             </article>
                                         </li>
                                     @empty
@@ -161,14 +335,38 @@
                                                     <div class="listItem-content">
                                                         <div class="">
                                                             <p class="listItem-brand">{{ $product->category->name }}</p>
-
+                                                            <div class="card-text card-rating"
+                                                                data-test-info-type="productRating">
+                                                                <span class="rating--small">
+                                                                    <div class="comments_note wb-list-product-reviews">
+                                                                        <span class="avg-rate bg-re3">
+                                                                            <span class="rate-tot winter-count">0</span><i
+                                                                                class="fa fa-star emstar"></i>
+                                                                            <span class="or-rate winter-review">
+                                                                                <span class="icon icon--ratingEmpty"><i
+                                                                                        class="fa fa-star-o"></i></span><span
+                                                                                    class="icon icon--ratingEmpty"><i
+                                                                                        class="fa fa-star-o"></i></span><span
+                                                                                    class="icon icon--ratingEmpty"><i
+                                                                                        class="fa fa-star-o"></i></span><span
+                                                                                    class="icon icon--ratingEmpty"><i
+                                                                                        class="fa fa-star-o"></i></span><span
+                                                                                    class="icon icon--ratingEmpty"><i
+                                                                                        class="fa fa-star-o"></i></span><!-- snippet location product_rating -->
+                                                                            </span>
+                                                                        </span>
+                                                                    </div>
+                                                                </span>
+                                                            </div>
                                                             <h4 class="listItem-title">
                                                                 <a href="{{ route('product', $product->alias) }}"
                                                                     aria-label="{{ $product->name }}">
                                                                     {{ $product->name }}
                                                                 </a>
                                                             </h4>
-
+                                                            <div class="category-list-desc">
+                                                                <p> {{ Str::limit($product->description, 250)  }}...</p>
+                                                            </div>
 
 
                                                             <div class="listItem-price">
@@ -184,23 +382,30 @@
 
                                                                 <div
                                                                     class="price-section d-inline-block price-section--withoutTax">
-                                                                    <span class="price-label">
+                                                                    <span class="price-label" style="display: none;">
 
                                                                     </span>
-                                                                    <span class="price-now-label" style="display: none;">
+                                                                    <span class="price-now-label">
 
                                                                     </span>
                                                                     <span data-product-price-without-tax=""
-                                                                        class="price price--withoutTax">Giá : Liên
-                                                                        hệ</span>
+                                                                        class="price price--withoutTax">{{ number_format($product->sale_price) }}</span>
                                                                 </div>
-                                                                <div class="price-section d-inline-block price-section--withoutTax non-sale-price--withoutTax"
-                                                                    style="display: none;">
+                                                                <div
+                                                                    class="price-section d-inline-block price-section--withoutTax non-sale-price--withoutTax">
 
                                                                     <span data-product-non-sale-price-without-tax=""
                                                                         class="price price--non-sale">
-
+                                                                        {{ number_format($product->price) }}
                                                                     </span>
+                                                                </div>
+                                                                <div class="singleprobtn">
+                                                                    <a href="{{ route('product', $product->alias) }}"
+                                                                        data-event-type="product-click" title="Add to Cart"
+                                                                        class="button button--small  myadcart"
+                                                                        data-product-id="86"><svg width="20px" height="20px">
+                                                                            <use xlink:href="#hcart"></use>
+                                                                        </svg><span class="cart-text">Thêm vào giỏ hàng</span></a>
                                                                 </div>
                                                             </div>
 

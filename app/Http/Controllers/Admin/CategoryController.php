@@ -23,11 +23,14 @@ class CategoryController extends Controller
     {
         $validated = $request->validated();
         try {
+            $isCreate  = $validated['id'] == 0 ? true : false;
             
-            $validated['id'] == 0
+            $category = $isCreate
                 ? $this->service->createCategory($validated)
                 : $this->service->updateCategory($validated['id'], $validated);
-                
+            if($request->has('image')){
+                $this->service->uploadImage($request->file('image'),$category->id);
+            }    
             return redirect()
                 ->route('admin.categories.index')
                 ->with('success', $validated['id'] == 0 ? 'Tạo danh mục thành công' : 'Cập nhật danh mục thành công');

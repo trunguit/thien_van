@@ -28,6 +28,24 @@ class ProductService
         return $this->repository->create($this->normalizeProductData($data));
     }
 
+    public function handleProductAttributes($productId, array $data ,$type)
+    {
+        // Xử lý colors
+        if (isset($data)) {
+            $this->syncAttributes($productId, $type, $data);
+        }
+    }
+
+    protected function syncAttributes($productId, $type, array $values)
+    {
+        // Xóa toàn bộ attributes cũ của loại này
+        $this->repository->deleteAttributesByType($productId, $type);
+
+        if (!empty($values)) {
+            $this->repository->addAttributes($productId, $type, $values);
+        }
+    }
+
     public function updateProduct(int $id, array $data)
     {
         return $this->repository->update($id, $this->normalizeProductData($data));

@@ -19,8 +19,10 @@ class SettingController extends Controller
     public function update(Request $request, GeneralSettings $settings)
     {
         $validated = $request->validate([
-            'phone' => 'nullable|string',
-            'email' => 'nullable|email',
+            'phone1' => 'nullable|string',
+            'phone2' => 'nullable|string',
+            'email1' => 'nullable|email',
+            'email2' => 'nullable|email',
             'facebook' => 'nullable|url',
             'shoppe' => 'nullable|url',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
@@ -49,7 +51,7 @@ class SettingController extends Controller
             $settings->favicon = $destinationPath.$newFilename;
         }
         // Cập nhật các trường khác
-        foreach (['phone', 'email', 'facebook', 'shoppe', 'address', 'meta_description', 'meta_title', 'introduction'] as $field) {
+        foreach (['phone1','phone2', 'email1','email2', 'facebook', 'shoppe', 'address', 'meta_description', 'meta_title', 'introduction'] as $field) {
             $settings->$field = $validated[$field] ?? null;
         }
 

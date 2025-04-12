@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\Contracts\CategoryRepositoryInterface;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 class CategoryService
 {
@@ -63,7 +64,23 @@ class CategoryService
             'parent_id' => $data['parent_id'] ?? null
         ]);
     }
+    public function uploadImage($file,$id)
+    {
+        $category = $this->repository->find($id);
+        $oldImage = $category->image;
+        if ($oldImage) {
+            if (file_exists($oldImage)) {
+                Storage::delete($oldImage);
+            }
+        }
 
+        $destinationPath = 'uploads/categories/';
+        $extension = $file->getClientOriginalExtension();
+        $newFilename = 'category_image_' . $id . '_' . time() . '_'  . $extension;
+        $this->repository->update($id, ['image' => $destinationPath.$newFilename]);
+        $file->move(public_path($destinationPath), $newFilename);
+        return $destinationPath.$newFilename;
+    }
     public function moveCategory(int $id , string $type){
         return $this->repository->move($id ,$type);
     }

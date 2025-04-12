@@ -10,4 +10,6 @@ interface ProductRepositoryInterface extends BaseRepositoryInterface
     public function getProductByAlias(string $alias);
     public function search(string $query);
     public function getProductRelated(int $id, int $category_id);
+    public function deleteAttributesByType($productId, $type);
+    public function addAttributes($productId, $type, array $values);
 }

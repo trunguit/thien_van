@@ -21,4 +21,24 @@ class Product extends Model
     public function avatar(){
         return $this->hasOne(ProductImage::class)->where('sort_order', 0);
     }
+    public function colorAttributes()
+    {
+        return $this->hasMany(ProductAttribute::class)->where('type', 'color');
+    }
+
+    public function sizeAttributes()
+    {
+        return $this->hasMany(ProductAttribute::class)->where('type', 'size');
+    }
+
+    // Helper methods
+    public function getColorsAttribute()
+    {
+        return $this->colorAttributes->pluck('value')->toArray();
+    }
+
+    public function getSizesAttribute()
+    {
+        return $this->sizeAttributes->pluck('value')->toArray();
+    }
 }

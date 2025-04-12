@@ -85,7 +85,7 @@
                             <div class="home-cate-item js-product-slide col-12 pro-col category-img">
                                 <div class="subcimginner ">
                                     <div class="catebg row">
-                                        <div class="cate-ti col-12">
+                                        <div class="cate-ti col-6">
                                             <h5 class="catename"><a href="{{route('category', $category->alias)}}">{{ $category->name }}</a></h5>
                                             <div class="">
                                                 @foreach ($category->children as $item)
@@ -101,15 +101,15 @@
                                                 
                                             </div>
                                         </div>
-                                        {{-- <div class="cate-img col-5">
-                                            <a class="" href="shop-all/index.html">
+                                        <div class="cate-img col-6">
+                                            <a class="" href="{{route('category', $category->alias)}}">
                                                 <span>
-                                                    <img src="../cdn11.bigcommerce.com/s-a4jwov0yt3/images/stencil/original/e/2__50732.original.png"
+                                                    <img src="{{$category->image != '' ? asset($category->image) : asset('frontend/cate.png')}}" alt=""
                                                         class="img-responsive img-fluid">
                                                 </span>
                                             </a>
 
-                                        </div> --}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

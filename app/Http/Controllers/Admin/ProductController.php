@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+
+    protected $availableSizes = ['S', 'M', 'L'];
+
     public function __construct(
         protected ProductService $productService ,
         protected CategoryService $categoryService
@@ -27,7 +30,8 @@ class ProductController extends Controller
     public function edit($id){
         $product = $this->productService->getProduct($id);
         $categories = $this->categoryService->getCategorySelectWithOutRoot();
-        return view('admin.products.edit', compact('product', 'categories'));
+        $availableSizes = $this->availableSizes;
+        return view('admin.products.edit', compact('product', 'categories', 'availableSizes'));
     }
 
     public function show(Request $request)
@@ -39,8 +43,9 @@ class ProductController extends Controller
 
     public function create()
     {
+        $availableSizes = $this->availableSizes;
         $categories = $this->categoryService->getCategorySelectWithOutRoot();
-        return view('admin.products.create', compact('categories'));
+        return view('admin.products.create', compact('categories', 'availableSizes'));
     }
 
     public function store(ProductRequest $request)
@@ -54,7 +59,20 @@ class ProductController extends Controller
                 $request->input('image_data', '[]') ?? '[]', // Đảm bảo luôn là string
                 $request->input('deleted_images', '[]') ?? '[]'
             );
-
+            if($request->colors){
+                $this->productService->handleProductAttributes(
+                    $product->id,
+                    $request->input('colors', '[]') ?? '[]',
+                    'color'
+                );
+            }
+            if($request->sizes){
+                $this->productService->handleProductAttributes(
+                    $product->id,
+                    $request->input('sizes', '[]') ?? '[]',
+                    'size'
+                );
+            }
             DB::commit();
 
             return redirect()
@@ -78,7 +96,20 @@ class ProductController extends Controller
                 $request->input('image_data', '[]') ?? '[]', // Đảm bảo luôn là string
                 $request->input('deleted_images', '[]') ?? '[]'
             );
-           
+            if($request->colors){
+                $this->productService->handleProductAttributes(
+                    $product->id,
+                    $request->input('colors', '[]') ?? '[]',
+                    'color'
+                );
+            }
+            if($request->sizes){
+                $this->productService->handleProductAttributes(
+                    $product->id,
+                    $request->input('sizes', '[]') ?? '[]',
+                    'size'
+                );
+            }
             DB::commit();
 
             return redirect()

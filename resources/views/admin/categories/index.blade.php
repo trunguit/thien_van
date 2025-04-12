@@ -33,7 +33,10 @@
                                         <td>{!! showNestedSetUpDown($item->id) !!}</td>
                                         <td class="text-end">
                                             <div class="col-action">
-                                                <a href="javascript:void(0)" data-url="{{ route('admin.categories.show', $item->id) }}" data-id="{{ $item->id }}" class="btn btn-sm edit font-sm rounded btn-brand"> <i
+                                                <a href="javascript:void(0)"
+                                                    data-url="{{ route('admin.categories.show', $item->id) }}"
+                                                    data-id="{{ $item->id }}"
+                                                    class="btn btn-sm edit font-sm rounded btn-brand"> <i
                                                         class="material-icons md-edit"></i> Edit </a>
                                                 <a href="javascript:void(0)"
                                                     data-url="{{ route('admin.categories.destroy', $item->id) }}"
@@ -55,44 +58,68 @@
     </div>
     <div class="modal fade" id="createCategoryModal" tabindex="-1" aria-labelledby="createCategoryModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createCategoryModalLabel">Thêm danh mục mới</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="createCategoryForm" action="{{ route('admin.categories.store') }}" method="POST">
+                <form id="createCategoryForm" action="{{ route('admin.categories.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="category_name" class="form-label">Tên danh mục</label>
-                            <input type="text" name="name" placeholder="Nhập tên danh mục" class="form-control"
-                                id="category_name" required>
-                            <input id="id" type="hidden" name="id" value="0">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="category_name" class="form-label">Tên danh mục</label>
+                                    <input type="text" name="name" placeholder="Nhập tên danh mục"
+                                        class="form-control" id="category_name" required>
+                                    <input id="id" type="hidden" name="id" value="0">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="category_name" class="form-label">Hình ảnh</label>
+                                    <input type="file" name="image" class="form-control" id="image" >
+                                </div>
+                                <div id="imagePreviewContainer" class="mt-3 mb-3 d-none">
+                                    <img id="imagePreview" src="#" alt="Preview" style="max-width: 200px; max-height: 200px;" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mô tả</label>
+                                    <textarea name="description" id="description" class="form-control" id="" cols="30"
+                                        rows="10"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Danh mục cha</label>
+                                    <select id="parent_id" class="form-select" name="parent_id">
+                                        @foreach ($categories_select as $key => $item)
+                                            <option value="{{ $key }}">{{ $item }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Trạng thái</label>
+                                    <select id="status" class="form-select" name="status">
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Inactive</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Seo Meta Title</label>
+                                    <input type="text" name="meta_title" placeholder="Meta Title" class="form-control"
+                                        id="meta_title">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Seo Meta Description</label>
+                                    <textarea name="meta_description" id="meta_description" class="form-control" id="" cols="30"
+                                        rows="10"></textarea>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Danh mục cha</label>
-                            <select id="parent_id" class="form-select" name="parent_id">
-                                @foreach ($categories_select as $key => $item)
-                                    <option value="{{ $key }}">{{ $item }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Trạng thái</label>
-                            <select id="status" class="form-select" name="status">
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Seo Meta Title</label>
-                            <input type="text" name="meta_title" placeholder="Meta Title" class="form-control" id="meta_title">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Seo Meta Description</label>
-                            <textarea name="meta_description" id="meta_description" class="form-control" id="" cols="30" rows="10"></textarea>
-                        </div>
+
+
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
@@ -105,6 +132,24 @@
 @endsection
 @push('scripts')
     <script>
+        $('#image').change(function() {
+            // Kiểm tra xem có file được chọn không
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    // Hiển thị container preview
+                    $('#imagePreviewContainer').removeClass('d-none');
+                    // Gán src cho thẻ img
+                    $('#imagePreview').attr('src', e.target.result);
+                }
+
+                // Đọc file như URL dữ liệu
+                reader.readAsDataURL(this.files[0]);
+            } else {
+                $('#imagePreviewContainer').hide();
+            }
+        });
         $('.deleteCategory').click(function() {
             $('#deleteForm').attr('action', $(this).attr('data-url'));
             $('#deleteConfirmationModal').modal('show');
@@ -136,6 +181,11 @@
             $('#category_name').val('');
             $('#meta_description').val('');
             $('#status').trigger('change');
+            $('#imagePreviewContainer').hide();
+            $('#imagePreview').attr('src', '');
+            $('#parent_id').val(0).trigger('change');
+            $('#description').val('');
+            $('#image').val('');
         });
         $('.edit').click(function() {
             var id = $(this).attr('data-id');
@@ -153,6 +203,9 @@
                     $('#parent_id').val(data.parent_id).trigger('change');
                     $('#meta_title').val(data.meta_title);
                     $('#meta_description').val(data.meta_description);
+                    $('#description').val(data.description);
+                    $('#imagePreviewContainer').removeClass('d-none');
+                    $('#imagePreview').attr('src', data.image);
                 },
             })
         });

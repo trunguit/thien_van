@@ -7,9 +7,11 @@ use Spatie\LaravelSettings\Settings;
 class GeneralSettings extends Settings
 {
     public ?string $site_name = 'Thiên Văn Group';
-    public ?string $phone = null;
+    public ?string $phone1 = null;
+    public ?string $phone2 = null;
     public ?string $address = null;
-    public ?string $email= null;
+    public ?string $email1= null;
+    public ?string $email2= null;
     public ?string $facebook= null;
     public ?string $shoppe= null;
     public ?string $logo= null;

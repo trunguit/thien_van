@@ -3,6 +3,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductAttribute;
 use App\Models\ProductImage;
 use App\Repositories\Contracts\BaseRepositoryInterface;
 use App\Repositories\Contracts\ProductRepositoryInterface;
@@ -61,5 +62,24 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     }
     public function getProductRelated(int $id, int $category_id){
         return Product::where('category_id', $category_id)->where('id','!=',$id)->paginate(20); 
+    }
+
+    public function deleteAttributesByType($productId, $type){
+        $product = Product::find($productId);
+        if ($type == 'color') {
+            $product->colorAttributes()->delete();
+        } elseif ($type == 'size') {
+            $product->sizeAttributes()->delete();
+        }
+    }
+    
+    public function addAttributes($productId, $type, array $values){
+        foreach ($values as $value) {
+            ProductAttribute::create([
+                'product_id' => $productId,
+                'type' => $type,
+                'value' => $value
+            ]);
+        }
     }
 }

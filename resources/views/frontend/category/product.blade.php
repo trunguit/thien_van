@@ -48,9 +48,8 @@
                                 data-zoom-image="{{ asset($product->avatar->path) }}">
                                 <div class="productView-img-container">
                                     <a href="{{ asset($product->avatar->path) }}" target="_blank">
-                                        <img src="{{ asset($product->avatar->path) }}"
-                                            alt="freash vegetable , 2 pc approx. 50 to 500 gm"
-                                            title="freash vegetable , 2 pc approx. 50 to 500 gm" data-sizes="auto"
+                                        <img src="{{ asset($product->avatar->path) }}" alt="{{ $product->name }}"
+                                            title="{{ $product->name }}" data-sizes="auto"
                                             srcset="{{ asset($product->avatar->path) }}"
                                             data-srcset="{{ asset($product->avatar->path) }}"
                                             class="lazyload productView-image--default" data-main-image />
@@ -66,9 +65,8 @@
                                             data-image-gallery-new-image-url="{{ asset($item->path) }}"
                                             data-image-gallery-new-image-srcset="{{ asset($item->path) }}"
                                             data-image-gallery-zoom-image-url="{{ asset($item->path) }}">
-                                            <img src="{{ asset($item->path) }}"
-                                                alt="freash vegetable , 2 pc approx. 50 to 500 gm"
-                                                title="freash vegetable , 2 pc approx. 50 to 500 gm" data-sizes="auto"
+                                            <img src="{{ asset($item->path) }}" alt="{{ $item->name }}"
+                                                title="{{ $item->name }}" data-sizes="auto"
                                                 srcset="{{ asset($item->path) }}" data-srcset="{{ asset($item->path) }}"
                                                 class="lazyload" />
                                         </a>
@@ -77,9 +75,9 @@
                             </ul>
 
                         </section>
-                        <div class="col-xl-6 col-md-6 col-12">
+                        <div class="col-xl-8 col-md-7 col-12">
                             <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-12 prorightw">
+                                <div class="col-xl-7 col-lg-7 col-12 prorightw">
                                     <section class="productView-details product-data">
                                         <div class="productView-product">
                                             <h1 class="productView-title">{{ $product->name }}</h1>
@@ -100,30 +98,214 @@
                                                 </div>
 
                                                 <div class="price-section d-inline-block price-section--withoutTax">
-                                                    <span class="price-label">
+                                                    <span class="price-label" style="display: none;">
 
                                                     </span>
-                                                    <span class="price-now-label" style="display: none;">
+                                                    <span class="price-now-label">
 
                                                     </span>
                                                     <span data-product-price-without-tax=""
-                                                        class="price price--withoutTax">Giá : Liên hệ</span>
+                                                        class="price price--withoutTax">{{ number_format($product->sale_price) }}đ</span>
                                                 </div>
+                                                <div
+                                                    class="price-section d-inline-block price-section--withoutTax non-sale-price--withoutTax">
 
+                                                    <span data-product-non-sale-price-without-tax=""
+                                                        class="price price--non-sale">
+                                                        {{ number_format($product->price) }}đ
+                                                    </span>
+                                                </div>
+                                                <div class="price-section d-inline-block price-section--saving price"
+                                                    style="display: none;">
+                                                    <span class="price">(You save</span>
+                                                    <span data-product-price-saved="" class="price price--saving">
 
+                                                    </span>
+                                                    <span class="price">)</span>
+                                                </div>
                                             </div>
 
                                             <div data-content-region="product_below_price"></div>
-                                            <div class="add-to-card">
-                                                <button class="button button--primary quote-request" type="button"><i
-                                                        class="fa fa-shopping-bag" aria-hidden="true"></i> Báo
-                                                    giá</button>
+                                            <div class="productView-rating">
+                                                <div class="comments_note wb-list-product-reviews">
+                                                    <span class="avg-rate bg-re3">
+                                                        <span class="rate-tot winter-count">0</span><i
+                                                            class="fa fa-star emstar"></i>
+                                                        <span class="or-rate winter-review">
+                                                            <span class="icon icon--ratingEmpty"><i
+                                                                    class="fa fa-star-o"></i></span><span
+                                                                class="icon icon--ratingEmpty"><i
+                                                                    class="fa fa-star-o"></i></span><span
+                                                                class="icon icon--ratingEmpty"><i
+                                                                    class="fa fa-star-o"></i></span><span
+                                                                class="icon icon--ratingEmpty"><i
+                                                                    class="fa fa-star-o"></i></span><span
+                                                                class="icon icon--ratingEmpty"><i
+                                                                    class="fa fa-star-o"></i></span><!-- snippet location product_rating -->
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <span>(No reviews yet)</span>
+                                                <a href="#"
+                                                    class="productView-reviewLink productView-reviewLink--new"
+                                                    role="button">
+                                                    Write a Review
+                                                </a>
+
                                             </div>
+                                            <div data-content-region="product_below_price"></div>
+                                            <dl class="productView-info">
+                                                <dt class="productView-info-name sku-label">SKU:</dt>
+                                                <dd class="productView-info-value" data-product-sku="">
+                                                    {{ $product->sku }}</dd>
+                                                <dt class="productView-info-name upc-label">UPC:</dt>
+                                                <dd class="productView-info-value" data-product-upc="">
+                                                    {{ $product->upc }}</dd>
+                                                <dt class="productView-info-name">Condition:</dt>
+                                                <dd class="productView-info-value">{{ $product->condition }}</dd>
+                                                <dt class="productView-info-name">Minimum Purchase:</dt>
+                                                <dd class="productView-info-value">{{ $product->min_qty }} unit</dd>
+                                                <dt class="productView-info-name">Maximum Purchase:</dt>
+                                                <dd class="productView-info-value">{{ $product->max_qty }} units</dd>
+
+                                            </dl>
                                         </div>
 
                                     </section>
                                 </div>
+                                <div class="col-xl-5 col-lg-5 col-12 prorightwt">
+                                    <section class="productView-details">
+                                        <div class="productView-options">
+                                            <form class="form" method="post" action="#"
+                                                enctype="multipart/form-data" data-cart-item-add>
+                                                <input type="hidden" name="action" value="add">
+                                                <input type="hidden" name="product_id" value="111" />
+                                                <div data-product-option-change>
+                                                    <div class="form-field" data-product-attribute="swatch"
+                                                        role="radiogroup" aria-labelledby="swatchGroup_113">
+                                                        <label
+                                                            class="form-label form-label--alternate form-label--inlineSmall"
+                                                            id="swatchGroup_113">
+                                                            Color:
+                                                            <span data-option-value></span>
 
+                                                            <small>
+                                                                *
+                                                            </small>
+                                                        </label>
+                                                        <span
+                                                            class="swatch-option-message aria-description--hidden u-hidden">
+                                                            Selected Color is
+                                                        </span>
+
+                                                        @foreach ($product->colorAttributes as $item)
+                                                            <div class="form-option-wrapper">
+                                                                <input class="form-radio" type="radio"
+                                                                    name="attribute[113]" value="{{ $item->id }}"
+                                                                    id="attribute_swatch_113_{{ $item->id }}" required
+                                                                    aria-label="Red">
+                                                                <label class="form-option form-option-swatch"
+                                                                    for="attribute_swatch_113_{{ $item->id }}"
+                                                                    data-product-attribute-value="{{ $item->id }}">
+                                                                    <span
+                                                                        class='form-option-variant form-option-variant--color'
+                                                                        title="Red"
+                                                                        style="background-color: {{ $item->value }}"></span>
+                                                                </label>
+                                                            </div>
+                                                        @endforeach
+
+
+                                                    </div>
+
+                                                    <div class="form-field" data-product-attribute="set-rectangle"
+                                                        role="radiogroup" aria-labelledby="rectangle-group-label">
+                                                        <label
+                                                            class="form-label form-label--alternate form-label--inlineSmall"
+                                                            id="rectangle-group-label">
+                                                            Size:
+                                                            <span data-option-value></span>
+
+                                                            <small>
+                                                                *
+                                                            </small>
+                                                        </label>
+
+                                                        @foreach ($product->sizeAttributes as $item)
+                                                            <div class="form-option-wrapper">
+                                                                <input class="form-radio" type="radio"
+                                                                    id="attribute_rectangle__114_{{ $item->id }}"
+                                                                    name="size[]" value="{{ $item->id }}" required>
+                                                                <label class="form-option"
+                                                                    for="attribute_rectangle__114_{{ $item->id }}"
+                                                                    data-product-attribute-value="{{ $item->id }}">
+                                                                    <span
+                                                                        class="form-option-variant">{{ $item->value }}</span>
+                                                                </label>
+                                                            </div>
+                                                        @endforeach
+
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-field form-field--stock u-hiddenVisually">
+                                                    <label class="form-label form-label--alternate">
+                                                        Current Stock:
+                                                        <span data-product-stock></span>
+                                                    </label>
+                                                </div>
+                                                <div id="add-to-cart-wrapper" class="add-to-cart-wrapper">
+
+                                                    <div class="form-field form-field--increments">
+                                                        <label class="form-label form-label--alternate"
+                                                            for="qty[]">Quantity:</label>
+                                                        <div class="form-increment" data-quantity-change>
+                                                            <button class="button button--icon" data-action="dec">
+                                                                <span class="is-srOnly">Decrease Quantity of freash
+                                                                    fruit , 1 pc approx. 500 to 500 gm</span>
+                                                                    <i class="fa fa-angle-down qty-down" aria-hidden="true"></i>
+                                                            </button>
+                                                            <input class="form-input form-input--incrementTotal"
+                                                                id="qty[]" name="qty[]" type="tel"
+                                                                value="1" data-quantity-min="1"
+                                                                data-quantity-max="10" min="1" pattern="[0-9]*"
+                                                                aria-live="polite">
+                                                            <button class="button button--icon" data-action="inc">
+                                                                <span class="is-srOnly">Increase Quantity of freash
+                                                                    fruit , 1 pc approx. 500 to 500 gm</span>
+                                                                    <i class="fa fa-angle-up qty-up" aria-hidden="true"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="alertBox productAttributes-message" style="display:none">
+                                                        <div class="alertBox-column alertBox-icon">
+                                                            <icon glyph="ic-success" class="icon" aria-hidden="true">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24">
+                                                                    <path
+                                                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z">
+                                                                    </path>
+                                                                </svg>
+                                                            </icon>
+                                                        </div>
+                                                        <p class="alertBox-column alertBox-message"></p>
+                                                    </div>
+                                                    <div class="form-action">
+                                                        <input id="form-action-addToCart"
+                                                            data-wait-message="Adding to cart…"
+                                                            class="button button--primary" type="submit"
+                                                            value="Add to Cart">
+                                                        <span
+                                                            class="product-status-message aria-description--hidden">Adding
+                                                            to cart… The item has been added</span>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </section>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -142,45 +324,7 @@
                             </div>
                             <div class="tab-content " id="tab-warranty">
                                 <div class="container my-5">
-                                    <h1 class="text-center mb-5">
-                                        Hướng Dẫn Mua Hàng
-                                    </h1>
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                                                <li class="nav-item" role="presentation">
-                                                    <button aria-controls="step1" aria-selected="true"
-                                                        class="nav-link active" data-bs-target="#step1"
-                                                        data-bs-toggle="tab" id="step1-tab" role="tab"
-                                                        type="button">
-                                                        1. Đặt Hàng Online
-                                                    </button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button aria-controls="step2" aria-selected="false" class="nav-link"
-                                                        data-bs-target="#step2" data-bs-toggle="tab" id="step2-tab"
-                                                        role="tab" type="button">
-                                                        2. Xác Nhận Đơn Hàng
-                                                    </button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button aria-controls="step3" aria-selected="false" class="nav-link"
-                                                        data-bs-target="#step3" data-bs-toggle="tab" id="step3-tab"
-                                                        role="tab" type="button">
-                                                        3. Thành Phẩm
-                                                    </button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button aria-controls="step4" aria-selected="false" class="nav-link"
-                                                        data-bs-target="#step4" data-bs-toggle="tab" id="step4-tab"
-                                                        role="tab" type="button">
-                                                        4. Giao Hàng
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                        </div>
-
-                                    </div>
+                                  Đang cập nhật ...
                                 </div>
                             </div>
                             <div class="tab-content" id="tab-reviews">
@@ -194,7 +338,8 @@
                 <div class="all-head">
                     <h2 class="page-heading">Sản phẩm liên quan</h2>
                 </div>
-
+                @if(count($products_related) > 0)
+                    
                 <div class="has-jsContent next-prevb" id="tab-related">
                     <section class="productCarousel slick-initialized slick-slider slick-dotted" data-list-name=""
                         data-slick='{
@@ -297,46 +442,25 @@
 
                                                 </span>
                                                 <span data-product-price-without-tax=""
-                                                    class="price price--withoutTax">Liên hệ</span>
+                                                    class="price price--withoutTax">{{ number_format($item->sale_price) }}đ</span>
                                             </div>
                                             <div class="price-section d-inline-block price-section--withoutTax non-sale-price--withoutTax"
                                                 style="display: none;">
 
                                                 <span data-product-non-sale-price-without-tax=""
-                                                    class="price price--non-sale">
-
+                                                    class="price price--non-sale">{{ number_format($item->price) }}đ</span>
                                                 </span>
                                             </div>
                                         </div>
 
-                                        <figcaption class="card-figcaption">
-                                            <div class="card-figcaption-body">
-                                                <!-- quick view icon -->
-                                                <button class="button button--small card-figcaption-button quickview"
-                                                    data-product-id="111" tabindex="0"><!-- Quick view --><svg
-                                                        width="20px" height="20px">
-                                                        <use xlink:href="#bquick"></use>
-                                                    </svg></button>
-                                                <!-- compare icon -->
-
-                                                <label class="button button--small card-figcaption-button bcom"
-                                                    for="compare-111" title="Compare">
-                                                    <svg width="20px" height="20px">
-                                                        <use xlink:href="#compare"></use>
-                                                    </svg><input class="wb-compare" type="checkbox" name="products[]"
-                                                        value="111" id="compare-111" data-compare-id="111"
-                                                        tabindex="0">
-                                                </label>
-
-                                            </div>
-                                        </figcaption>
+                                        
                                         <!-- add to cart icon -->
                                         <div class="singleprobtn">
-                                            <a href="javascript:void(0)" data-event-type="product-click" title="Báo giá"
+                                            <a href="{{ route('product', ['slug' => $item->slug]) }}" data-event-type="product-click" title="Báo giá"
                                                 class="button button--small card-figcaption-button myadcart"
                                                 data-product-id="111" tabindex="0"><svg width="20px" height="20px">
                                                     <use xlink:href="#hcart"></use>
-                                                </svg><span class="cart-text">Báo giá</span></a>
+                                                </svg><span class="cart-text">Thêm giỏ hàng</span></a>
                                         </div>
                                     </div>
                                 </article>
@@ -359,79 +483,56 @@
                                 aria-label="Go to slide 2 of 3"></span></button>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </main>
 
-    <style>
-        .thumbnail-slider {
-            margin-top: 10px;
-        }
 
-        .thumbnail-slider img {
-            width: 70px;
-            height: 70px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 5px;
-        }
-
-        .quote-request {
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 16px;
-            line-height: 22px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            white-space: nowrap;
-            padding: 13px 30px;
-            border: none;
-            border-radius: 10px;
-            letter-spacing: 0;
-            color: #347758;
-            background-color: #f2b922;
-            transition: all 0.3s ease;
-
-        }
-
-        .quote-request:hover {
-            background-color: #c0951f;
-            color: #000000;
-            text-decoration: none;
-        }
-
-        .fa-shopping-bag {
-            margin-right: 11px;
-            margin-bottom: 3px;
-        }
-
-        .modal {
-            z-index: 1050 !important;
-        }
-
-        .modal-backdrop {
-            z-index: 1040 !important;
-        }
-    </style>
 @endsection
 
 @push('scripts')
     <script>
         $(document).ready(function() {
-            $(".productView-thumbnails").owlCarousel({
-                items: 4,
-                margin: 10,
-                loop: true,
-                nav: false
+            // Initialize Owl Carousel for thumbnails
+            $("#addi-img").owlCarousel({
+                itemsCustom: [
+                    [0, 1],
+                    [320, 3],
+                    [425, 4],
+                    [575, 5],
+                    [768, 3],
+                    [991, 4],
+                    [1409, 5]
+                ],
+                autoPlay: 7000,
+                navigationText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>',
+                    '<i class="fa fa-angle-right" aria-hidden="true"></i>'
+                ],
+                navigation: false,
+                pagination: false
             });
+
+            // Handle click on thumbnails to change main image
             $(".productView-thumbnail-link").click(function(e) {
                 e.preventDefault();
-                var newSrc = $(this).attr("data-image-gallery-new-image-url");
-                $(".productView-image img").attr("src", newSrc)
-                    .attr("srcset", newSrc)
-                    .attr("data-srcset", newSrc);
+
+                // Get the new image data from clicked thumbnail
+                const newImageUrl = $(this).data('image-gallery-new-image-url');
+                const newImageSrcset = $(this).data('image-gallery-new-image-srcset');
+                const zoomImageUrl = $(this).data('image-gallery-zoom-image-url');
+
+                // Update main image
+                const mainImage = $(".productView-image--default");
+                mainImage.attr('src', newImageUrl);
+                mainImage.attr('srcset', newImageSrcset);
+
+                // Update zoom image data if you're using zoom functionality
+                $(".productView-image").data('zoom-image', zoomImageUrl);
+
+                // If you're using a zoom plugin, you might need to reinitialize it here
+                // For example, if using elevateZoom:
+                // $(".productView-image--default").elevateZoom({zoomType: "inner", cursor: "crosshair"});
             });
         });
         $('.quote-request').click(function() {
