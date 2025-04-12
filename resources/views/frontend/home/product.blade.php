@@ -116,16 +116,28 @@
 
                                                 </span>
                                                 <span data-product-price-without-tax
-                                                    class="price price--withoutTax">Liên hệ</span>
+                                                    class="price price--withoutTax">{{ number_format($product->sale_price) }}đ</span>
                                             </div>
                                             <div class="price-section d-inline-block price-section--withoutTax non-sale-price--withoutTax"
                                                 style="display: none;">
 
                                                 <span data-product-non-sale-price-without-tax
                                                     class="price price--non-sale">
-
+                                                    {{ number_format($product->price) }}đ
                                                 </span>
                                             </div>
+                                        </div>
+                                        <div class="card-text card-rating" data-test-info-type="productRating">
+                                            <span class="rating--small">
+                                                <div class="comments_note wb-list-product-reviews">
+                                                    <span class="avg-rate bg-re3">
+                                                        <span class="rate-tot winter-count">0</span><i class="fa fa-star emstar"></i>
+                                                        <span class="or-rate winter-review">
+                                                            <span class="icon icon--ratingEmpty"><i class="fa fa-star-o"></i></span><span class="icon icon--ratingEmpty"><i class="fa fa-star-o"></i></span><span class="icon icon--ratingEmpty"><i class="fa fa-star-o"></i></span><span class="icon icon--ratingEmpty"><i class="fa fa-star-o"></i></span><span class="icon icon--ratingEmpty"><i class="fa fa-star-o"></i></span><!-- snippet location product_rating -->
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            </span>
                                         </div>
                                         <!-- add to cart icon -->
                                         <div class="singleprobtn">
@@ -134,7 +146,7 @@
                                                 class="button button--small card-figcaption-button myadcart"
                                                 data-product-id="111"><svg width="20px" height="20px">
                                                     <use xlink:href="#hcart"></use>
-                                                </svg><span class="cart-text">Báo giá</span></a>
+                                                </svg><span class="cart-text">Thêm vào giỏ hàng</span></a>
                                         </div>
                                     </div>
                                 </article>
