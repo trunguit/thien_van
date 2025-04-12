@@ -14,7 +14,7 @@ class BannerController extends Controller
         
     }
     public function index(){
-        $banners = $this->service->getAllBanner();
+        $banners = $this->service->getAll();
         return view('admin.banners.index',compact('banners'));
     }
 

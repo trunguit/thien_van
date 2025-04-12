@@ -414,6 +414,12 @@
                                                     title="{{ $item->name }}"
                                                     class="card-image lazyautosizes ls-is-cached lazyloaded"
                                                     sizes="320px">
+                                                @if ($product->avatar2nd != null)
+                                                    <img src="{{ $product->avatar2nd->path }}"
+                                                        alt="{{ $product->name }}" title="{{ $product->name }}"
+                                                        data-sizes="auto" data-src="{{ $product->avatar2nd->path }}"
+                                                        class="lazyload second-img" />
+                                                @endif
                                             </div>
                                         </a>
                                     </figure>

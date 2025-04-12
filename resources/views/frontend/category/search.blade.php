@@ -190,8 +190,8 @@
                                                                     sizes="342px">
                                                             @endif
                                                         </div>
-                                                        @if (isset($product->avatar) && isset($product->avatar->path))
-                                                            <img src="{{ asset($product->avatar->path) }}"
+                                                        @if (isset($product->avatar2nd) && isset($product->avatar2nd->path))
+                                                            <img src="{{ asset($product->avatar2nd->path) }}"
                                                                 alt="{{ $product->name ?? '' }}"
                                                                 title="{{ $product->name ?? '' }}" class="second-img">
                                                         @endif

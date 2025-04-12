@@ -85,10 +85,17 @@
                                     <figure class="card-figure featured-imag">
                                         <a href="{{ route('product', $product->alias) }}">
                                             <div class="card-img-container">
-                                                <img src="{{ $product->avatar->path }}" alt="{{ $product->name }}"
+                                                <img src="{{ $product->avatar->webp_path }}" alt="{{ $product->name }}"
                                                     title="{{ $product->name }}" data-sizes="auto"
-                                                    data-src="{{ $product->avatar->path }}"
+                                                    data-src="{{ $product->avatar->webp_path }}"
                                                     class="lazyload card-image" />
+                                                @if ($product->avatar2nd != null)
+                                                    <img src="{{ $product->avatar2nd->webp_path }}"
+                                                        alt="{{ $product->name }}" title="{{ $product->name }}"
+                                                        data-sizes="auto" data-src="{{ $product->avatar2nd->webp_path }}"
+                                                        class="lazyload second-img" />
+                                                @endif
+
                                             </div>
                                         </a>
                                     </figure>
@@ -131,9 +138,19 @@
                                             <span class="rating--small">
                                                 <div class="comments_note wb-list-product-reviews">
                                                     <span class="avg-rate bg-re3">
-                                                        <span class="rate-tot winter-count">0</span><i class="fa fa-star emstar"></i>
+                                                        <span class="rate-tot winter-count">0</span><i
+                                                            class="fa fa-star emstar"></i>
                                                         <span class="or-rate winter-review">
-                                                            <span class="icon icon--ratingEmpty"><i class="fa fa-star-o"></i></span><span class="icon icon--ratingEmpty"><i class="fa fa-star-o"></i></span><span class="icon icon--ratingEmpty"><i class="fa fa-star-o"></i></span><span class="icon icon--ratingEmpty"><i class="fa fa-star-o"></i></span><span class="icon icon--ratingEmpty"><i class="fa fa-star-o"></i></span><!-- snippet location product_rating -->
+                                                            <span class="icon icon--ratingEmpty"><i
+                                                                    class="fa fa-star-o"></i></span><span
+                                                                class="icon icon--ratingEmpty"><i
+                                                                    class="fa fa-star-o"></i></span><span
+                                                                class="icon icon--ratingEmpty"><i
+                                                                    class="fa fa-star-o"></i></span><span
+                                                                class="icon icon--ratingEmpty"><i
+                                                                    class="fa fa-star-o"></i></span><span
+                                                                class="icon icon--ratingEmpty"><i
+                                                                    class="fa fa-star-o"></i></span><!-- snippet location product_rating -->
                                                         </span>
                                                     </span>
                                                 </div>
@@ -246,15 +263,22 @@
                             <figure class="card-figure featured-imag">
                                 <a href="{{ route('product', $product->alias) }}">
                                     <div class="card-img-container">
-                                        <img src="{{ $product->avatar->path }}" alt="{{ $product->name }}"
+                                        <img src="{{ $product->avatar->webp_path }}" alt="{{ $product->name }}"
                                             title="{{ $product->name }}" data-sizes="auto"
                                             class="lazyload card-image" />
+                                        @if ($product->avatar2nd != null)
+                                            <img src="{{ $product->avatar2nd->webp_path }}" alt="{{ $product->name }}"
+                                                title="{{ $product->name }}" data-sizes="auto"
+                                                data-src="{{ $product->avatar2nd->webp_path }}"
+                                                class="lazyload second-img" />
+                                        @endif
                                     </div>
 
                                 </a>
                             </figure>
                             <div class="card-body featured-caption">
-                                <p class="card-text" data-test-info-type="brandName">{{ $product->category->name }}</p>
+                                <p class="card-text" data-test-info-type="brandName">{{ $product->category->name }}
+                                </p>
                                 <h4 class="card-title">
                                     <a href="{{ route('product', $product->alias) }}">{{ $product->name }}</a>
                                 </h4>
@@ -286,9 +310,9 @@
                                             {{ number_format($product->price) }}đ
                                         </span>
                                     </div>
-                                   
+
                                 </div>
-                                
+
                                 <div class="card-text card-rating" data-test-info-type="productRating">
                                     <span class="rating--small">
                                         <div class="comments_note wb-list-product-reviews">

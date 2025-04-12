@@ -25,6 +25,7 @@ class BannerRequest extends FormRequest
             'id'=>'required|integer',
             'status' => 'required|in:active,inactive',
             'link' => 'nullable|string',
+            'type' => 'required|in:slider,banner',
         ];
     }
    

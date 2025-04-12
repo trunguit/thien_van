@@ -12,12 +12,18 @@ class BannerService
     public function __construct(
         protected BannerRepositoryInterface $repository
     ) {}
-
-    public function getAllBanner()
+    
+    public function getAll()
     {
         return $this->repository->all();
     }
-
+    public function getAllBanners()
+    {
+        return $this->repository->allBanners();
+    }
+    public function getAllSliders(){
+        return $this->repository->allSliders();
+    }
     public function getBanner(int $id)
     {
         return $this->repository->find($id);

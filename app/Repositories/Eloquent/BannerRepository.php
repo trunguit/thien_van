@@ -16,4 +16,19 @@ class BannerRepository extends BaseRepository implements BannerRepositoryInterfa
         return $banners;
     }
 
+    public function allBanners()
+    {
+        $banners =  $this->model->where('type', 'banner')
+                    ->orderBy('id','DESC')
+                    ->take(3)->get();   
+        return $banners;
+    }
+    public function allSliders()
+    {
+        $banners =  $this->model->where('type', 'slider')
+                    ->orderBy('id','DESC')
+                    ->get();   
+        return $banners;
+    }
+
 }

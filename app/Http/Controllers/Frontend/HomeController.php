@@ -28,7 +28,8 @@ class HomeController extends Controller
     public function index()
     {   
         $blogs = $this->blogService->getBlogsHome();
-        $banners = $this->bannerService->getAllBanner();
+        $sliders = $this->bannerService->getAllSliders();
+        $banners = $this->bannerService->getAllBanners();
         $settings = $this->generalSettings;
         $categories = $this->categoryService->categoriesHome();
         $brands = Partner::where('status','active')->get();
@@ -36,6 +37,7 @@ class HomeController extends Controller
         return view('frontend.home.index',[           
             'blogs' => $blogs,
             'banners' => $banners,
+            'sliders' => $sliders,
             'settings' => $settings,
             'categories' => $categories,
             'brands' => $brands,

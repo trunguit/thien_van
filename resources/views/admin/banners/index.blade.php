@@ -16,6 +16,7 @@
                     <tr>
                         <th>#ID</th>
                         <th scope="col">Hình ảnh</th>
+                        <th scope="col">Loại</th>
                         <th scope="col">Status</th>
                         <th scope="col">Link</th>
                         <th scope="col" class="text-end">Action</th>
@@ -26,6 +27,7 @@
                     <tr>
                         <td>{{$item->id}}</td>
                         <td><a href="{{route('admin.banners.edit', $item->id)}}"><img src="{{ $item->image ? asset($item->image) : asset('admin/imgs/image_default.webp')}}" alt="blog" class="img-sm"></a></td>
+                        <td>{{$item->type == 'banner' ? 'Banner' : 'Slider'}}</td>
                         <td><span class="badge bg-{{$item->status == 'active' ? 'success' : 'warning'}}">{{$item->status}}</span> </td>
                         <td>{{$item->link}}</td>
                         <td class="text-end">

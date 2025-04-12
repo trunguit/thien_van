@@ -22,6 +22,13 @@
                         style="max-width: 200px; max-height: 200px;" />
                 </div>
                 <div class="mb-4">
+                    <label for="product_title" class="form-label">Loại</label>
+                    <select name="type" id="type" class="form-select">
+                        <option {{ $banner->type == 'slider' ? 'selected' : '' }} value="slider">Slider</option>
+                        <option {{ $banner->type == 'banner' ? 'selected' : '' }} value="banner">Banner</option>
+                    </select>
+                </div>
+                <div class="mb-4">
                     <label for="product_title" class="form-label">Trạng thái</label>
                     <select name="status" id="status" class="form-select">
                         <option {{ $banner->status == 'active' ? 'selected' : '' }} value="active">Hoạt động</option>

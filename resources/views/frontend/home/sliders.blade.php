@@ -8,7 +8,7 @@
                     "autoplaySpeed": 5000,
                     "slide": "[data-hero-slide]"
                 }'>
-    @foreach ($banners as $key => $item)
+    @foreach ($sliders as $key => $item)
     <div data-hero-slide="{{$key}}">
         <div class="heroCarousel-slide  heroCarousel-slide--first">
             <a href="{{$item->link != '' ? $item->link : '#'}}" target="_blank" class="heroCarousel-image-wrapper">

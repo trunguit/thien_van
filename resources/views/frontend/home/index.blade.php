@@ -5,7 +5,7 @@
 @section('content')
 <main class="body" id="main-content" role="main" data-currency-code="INR">
     <div data-content-region="home_below_menu"></div>
-    @include('frontend.home.banner')
+    @include('frontend.home.sliders')
     <div data-content-region="home_below_carousel"></div>
 
     <div class="">
@@ -99,7 +99,8 @@
             @endforeach
            
         </div>
-       
+        <div data-content-region="home_below_top_products"></div>
+        @include('frontend.home.banners')
         <div data-content-region="home_below_top_products"></div>
         @include('frontend.home.testimonials')
 
