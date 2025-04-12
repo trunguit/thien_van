@@ -43,7 +43,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">copyright</label>
-                        <input type="email" name="copyright" class="form-control" value="{{ $settings->copyright }}">
+                        <input type="text" name="copyright" class="form-control" value="{{ $settings->copyright }}">
                     </div>
 
                    

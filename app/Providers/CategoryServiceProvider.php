@@ -26,5 +26,6 @@ class CategoryServiceProvider extends ServiceProvider
     public function boot(): void
     {
         view()->composer('frontend.layouts.header', CategoryComposer::class);
+        view()->composer('frontend.layouts.footer', CategoryComposer::class);
     }
 }
