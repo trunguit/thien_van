@@ -31,6 +31,7 @@ class SettingController extends Controller
             'meta_description' => 'nullable|string',
             'meta_title' => 'nullable|string',
             'introduction' => 'nullable|string',
+            'copyright' => 'nullable|string',
         ]);
 
         // Xử lý upload logo
@@ -51,7 +52,7 @@ class SettingController extends Controller
             $settings->favicon = $destinationPath.$newFilename;
         }
         // Cập nhật các trường khác
-        foreach (['phone1','phone2', 'email1','email2', 'facebook', 'shoppe', 'address', 'meta_description', 'meta_title', 'introduction'] as $field) {
+        foreach (['phone1','phone2', 'email1','email2', 'facebook', 'shoppe','copyright', 'address', 'meta_description', 'meta_title', 'introduction'] as $field) {
             $settings->$field = $validated[$field] ?? null;
         }
 

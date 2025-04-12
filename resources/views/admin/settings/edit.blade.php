@@ -41,7 +41,10 @@
                         <label class="form-label">Email 2</label>
                         <input type="email" name="email1" class="form-control" value="{{ $settings->email2 }}">
                     </div>
-                  
+                    <div class="mb-3">
+                        <label class="form-label">copyright</label>
+                        <input type="email" name="copyright" class="form-control" value="{{ $settings->copyright }}">
+                    </div>
 
                    
                 </div>

@@ -19,6 +19,7 @@ class GeneralSettings extends Settings
     public ?string $meta_title= null;
     public ?string $meta_description= null;
     public ?string $introduction= null;
+    public ?string $copyright= null;
 
     public static function group(): string
     {
