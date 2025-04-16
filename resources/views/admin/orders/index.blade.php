@@ -20,11 +20,12 @@
                                 <tr>
 
                                     <th>ID</th>
-                                    <th style="width: 30%">Tên sản phẩm</th>
-                                    <th>Số lượng</th>
                                     <th >Tên khách hàng</th>
                                     <th >Số điện thoại</th>
                                     <th >Địa chỉ</th>
+                                    <th>Số lượng</th>
+                                    <th>Tổng tiền</th>
+                                    <th >Thời gian đặt hàng</th>
                                     <th class="text-end">Hành động</th>
                                 </tr>
                             </thead>
@@ -32,13 +33,15 @@
                                 @foreach ($orders as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->product_name }}</td>
-                                        <td>{{ $item->qty }}</td>
                                         <td>{{ $item->customer_name }}</td>
                                         <td>{{ $item->customer_phone }}</td>
                                         <td>{{ $item->customer_address }}</td>
+                                        <td>{{ $item->getQty() }}</td>
+                                        <td>{{ number_format($item->total) }}đ</td>
+                                        <td>{{ $item->created_at }}</td>
                                         <td class="text-end">
                                             <div class="col-action">
+                                                <a href="{{ route('admin.orders.details', $item->id) }}"   class="btn btn-sm font-sm rounded btn-brand"> <i class="material-icons md-view_list"></i> Chi tiết </a>
                                                 <a href="javascript:void(0)"
                                                     data-url="{{ route('admin.customers.destroy', $item->id) }}"
                                                     class="btn deleteCategory btn-sm font-sm btn-light rounded"> <i

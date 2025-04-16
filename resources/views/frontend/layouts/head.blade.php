@@ -75,7 +75,7 @@
     <link data-stencil-stylesheet
         href="../frontend/s-a4jwov0yt3/stencil/10642b80-fc20-013a-d182-5e560fa59e55/css/theme.css"
         rel="stylesheet">
-
+    @stack('css')
 
     <script type="text/javascript">
         var BCData = {};

@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\KeywordController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\DeployHookController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Models\Keyword;
 use App\Models\Page;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +29,12 @@ Route::post('/post-login',[AuthencationController::class, 'handleLogin'])->name(
 Route::middleware(['auth'])->prefix('admin')->group(function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::post('/tinymce/upload-image', [TinymceController::class, 'uploadImage']);
-    Route::get('/orders', [OrderController::class, 'index'])->name('admin.orders.index');
+    
+    Route::prefix('orders')->group(function() {
+        Route::get('/', [OrderController::class, 'index'])->name('admin.orders.index');
+        Route::get('/order-details/{id}', [OrderController::class, 'details'])->name('admin.orders.details');
+        Route::post('/update-order', [OrderController::class, 'update'])->name('admin.orders.update');
+    });
     // Categories routes
     Route::prefix('categories')->group(function() {
         Route::get('/', [CategoryController::class, 'index'])->name('admin.categories.index');
@@ -108,8 +114,14 @@ Route::get('bai-viet/{alias?}.html', [FrontendBlogController::class, 'detail'])-
 Route::get('tat-ca-bai-viet.html', [FrontendBlogController::class, 'index'])->name('frontend.blogs.index');
 Route::get('tim-kiem', [HomeController::class, 'search'])->name('frontend.search');
 Route::get('trang/{alias?}.html', [HomeController::class, 'page'])->name('frontend.page');
-
-Route::post('yeu-cau-bao-gia.html', [FrontendCategoryController::class, 'quotes'])->name('frontend.quotes.store');
+Route::get('get-cart.html', [CartController::class, 'getCart'])->name('frontend.cart');
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+Route::patch('/cart/update', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+Route::post('process-cart', [CartController::class, 'processCart'])->name('frontend.processCart');
 Route::post('deploy-hook', [DeployHookController::class, 'handleDeploy'])
      ->withoutMiddleware(['csrf']);
 Route::get('/test-route.html', function () {

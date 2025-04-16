@@ -353,3 +353,8 @@
         </path>
     </symbol>
 </svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="injected-svg icons-svg-sprite" data-src="https://cdn11.bigcommerce.com/s-a4jwov0yt3/stencil/10642b80-fc20-013a-d182-5e560fa59e55/img/icon-sprite.svg">
+    <symbol viewBox="0 0 24 24" id="icon-keyboard-arrow-down"><path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"></path></symbol>
+    <symbol viewBox="0 0 24 24" id="icon-keyboard-arrow-up"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></symbol>
+    <symbol viewBox="0 0 24 24" id="icon-close"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></symbol>
+</svg>

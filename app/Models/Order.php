@@ -7,8 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $guarded = [];
-    public function product()
+
+    public function orderDetails()
     {
-        return $this->belongsTo(Product::class);
+        return $this->hasMany(OrderDetail::class);
+    }
+
+    public function getQty(){
+        return $this->orderDetails()->sum('qty');
     }
 }

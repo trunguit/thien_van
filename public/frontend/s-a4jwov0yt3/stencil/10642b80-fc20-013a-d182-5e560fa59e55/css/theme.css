@@ -864,6 +864,7 @@ cite {
     background: #e5e5e5;
     font-size: 1rem;
     height: auto;
+    min-width: 320px !important;
     width: 100%;
     z-index: 89;
     max-width: 200px
@@ -12801,9 +12802,7 @@ article .wb-list-product-reviews:hover .or-rate {
     margin: 0 0 0
 }
 
-.productList {
-    display: none
-}
+
 
 .category-grid .active svg {
     fill: #4b8106;
@@ -13142,7 +13141,7 @@ article .wb-list-product-reviews:hover .or-rate {
 .secondcusheader {
     -ms-flex-align: center;
     align-items: center;
-    margin: 0 100px;
+    margin: 0 50px;
     border-radius: 10px;
     padding: 12px 0;
     background: 0 0

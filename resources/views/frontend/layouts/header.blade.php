@@ -100,8 +100,7 @@
                                             id="search_query" data-error-message="Search field cannot be empty."
                                             placeholder="Tìm kiếm sản phẩm" autocomplete="off">
                                         <div class="input-group-btn">
-                                            <button class="wb-search-btn" align="center"
-                                                type="submit" value="Search">
+                                            <button class="wb-search-btn" align="center" type="submit" value="Search">
                                                 <svg width="20px" height="20px">
                                                     <use xlink:href="#mysearch"></use>
                                                 </svg>
@@ -119,11 +118,19 @@
 
                         </div>
                     </li>
+                    <li class="navUser-item navUser-item--cart">
+                        <a class="navUser-action itscart navUser-item--cart__hidden-s" data-cart-preview=""
+                            data-dropdown="cart-preview-dropdown" data-options="align:right" href="cart.html"
+                            aria-label="Cart with 0 items"><svg width="20px" height="20px">
+                                <use xlink:href="#hcart"></use>
+                            </svg>
+                            <span class="countPill cart-quantity1" id="cart-count">{{Cart::count()}}</span>
+                        </a>
+                        <div class="dropdown-menu headlog-cart" id="cart-preview-dropdown" data-dropdown-content=""
+                            aria-hidden="true">
+                          
+                        </div>
                     </li>
-                    <!-- user icon -->
-
-                    <!-- cart icon -->
-
                 </div>
             </div>
             <div class="row">

@@ -7,6 +7,7 @@ use App\Http\Requests\OrderRequest;
 use App\Models\Order;
 use App\Services\CategoryService;
 use App\Services\ProductService;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
