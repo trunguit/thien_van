@@ -158,7 +158,7 @@
                                         </div>
                                         <!-- add to cart icon -->
                                         <div class="singleprobtn">
-                                            <a href="smith-journal-13/index.html" data-event-type="product-click"
+                                            <a href="{{ route('product', $product->alias) }}" data-event-type="product-click"
                                                 title="Add to Cart"
                                                 class="button button--small card-figcaption-button myadcart"
                                                 data-product-id="111"><svg width="20px" height="20px">
